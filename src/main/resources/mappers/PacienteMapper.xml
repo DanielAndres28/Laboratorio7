@@ -5,6 +5,31 @@
   
 <mapper namespace="edu.eci.pdsw.samples.mybatis.mappers.PacienteMapper">
 
+<resultMap type='Paciente' id='pacResult'>
+    <id property='id' column='idpaciente'/>
+    <id property='nombre' column='nombre'/>
+    <result property='fechaNacimiento' column='fecha_nacimiento'/>    
+    <collection property='consulta' ofType='Consulta' resultMap="resmConsult" columnPrefix="consult"></collection>    
+</resultMap>
+
+<resultMap type='Consulta' id='resmConsult'>
+    <id property='id' column='identificador'/>
+    <id property='fechayHora' column='FechyHor'/>
+    <result property='resumen' column='descripcion'/>
+</resultMap>
+
+<select id = "loadPacienteById" resultMap="pacResult">
+   select pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consulta_identificador, con.fecha_y_hora as consulta_fecyhor, con.resumen as consulta_des from PACIENTES as pac inner join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=#{idpaciente} and pac.tipo_id='CC'
+</select>
+
+
+<insert id="insertPaciente" parameterType="map">
+    INSERT into PACIENTES(id,tipo_id,nombre,fecha_nacimiento) values(#{pacien.id},#{pacien.tipo_id},#{pacien.nombre},#{pacien.fechaNacimiento})
+</insert>
+
+<insert id="insertConsulta" parameterType="map">
+     INSERT INTO CONSULTAS(fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id) values(#{consul.fechayHora},#{consul.resumen},#{fk_idpacien},#{fk_tipopacien})
+</insert>
 
                                                                                                 
 </mapper>
