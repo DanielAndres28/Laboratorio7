@@ -71,7 +71,7 @@ public class MyBatisExample {
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
 
-        
+        System.out.println(pmap.loadPacienteById(1,"CC"));
         
         sqlss.commit();
         

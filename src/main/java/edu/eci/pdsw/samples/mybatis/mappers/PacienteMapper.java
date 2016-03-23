@@ -32,7 +32,7 @@ public interface PacienteMapper {
      * @param tipoid tipo de id
      * @return 
      */
-    public Paciente 4(@Param("idpaciente")int id,@Param("tipopaciente")String tipoid);
+    public Paciente loadPacienteById(@Param("idpaciente")int id,@Param("tipopaciente")String tipoid);
 
     /**
      * Insertar un nuevo paciente
@@ -47,5 +47,5 @@ public interface PacienteMapper {
      * @param tipoid el tipo de ID del PACIENTE
      */
     public void insertConsulta(@Param("consul")Consulta con,@Param("fk_idpacien")int id, @Param("fk_tipopacien")String tipoid);
-        
+    
 }
