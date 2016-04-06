@@ -19,9 +19,18 @@
 </resultMap>
 
 <select id = "loadPacienteById" resultMap="pacResult">
-   select pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consult_identificador, con.fecha_y_hora as consult_fechyHor, con.resumen as consult_descripcion from PACIENTES as pac inner join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=#{idpaciente} and pac.tipo_id='CC'
+   select pac.nombre, pac.fecha_nacimiento, con.idCONSULTAS as consult_identificador, con.fecha_y_hora as consult_fechyHor, con.resumen as consult_descripcion from PACIENTES as pac left join CONSULTAS as con on con.PACIENTES_id=pac.id and con.PACIENTES_tipo_id=pac.tipo_id where pac.id=#{idpaciente} and pac.tipo_id='CC'
 </select>
 
+<insert id="insertPaciente" resultMap="map">
+    insert into PACIENTES (id,tipo_id,nombre,fecha_nacimiento)
+  values (#{id},#{tipo_id},#{nombre},#{fecha_nacimientos})
+</insert>
+
+<insert id="insertConsulta" useGeneratedKeys="true" keyProperty="consul.id">
+    insert into CONSULTAS (fecha_y_hora,resumen,PACIENTES_id,PACIENTES_tipo_id)
+  values (#{(fecha_y_hora},#{resumen},#{PACIENTES_id},#{PACIENTES_tipo_id})
+</insert>
 
 
 
