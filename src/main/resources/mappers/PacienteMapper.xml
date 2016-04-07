@@ -7,6 +7,7 @@
 
 <resultMap type='Paciente' id='pacResult'>
     <id property='id' column='id'/>
+    <id property="tipo_id" column="tipo_id"/>
     <result property='nombre' column='nombre'/>
     <result property='fechaNacimiento' column='fecha_nacimiento'/>    
     <collection property='consultas' ofType='Consulta' resultMap="resmConsult" columnPrefix="consult_"></collection>    
