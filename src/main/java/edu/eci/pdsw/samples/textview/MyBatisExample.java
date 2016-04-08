@@ -70,8 +70,13 @@ public class MyBatisExample {
         SqlSession sqlss = sessionfact.openSession();
 
         PacienteMapper pmap=sqlss.getMapper(PacienteMapper.class);
+        Date d =new java.sql.Date(1994-01-29);
+        Consulta c = new Consulta(java.sql.Date.valueOf("2016-04-01"), "Esta muy gordo");
+        
+        pmap.insertConsulta(c, 12, "CC");
+        System.out.println(pmap.loadPacienteById(12, "CC"));
 
-        System.out.println(pmap.loadPacienteById(1,"CC"));
+        System.out.println(pmap.loadPacienteById(105,"CC"));
         
         sqlss.commit();
         
